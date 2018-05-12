@@ -8,6 +8,66 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.get('444882109086171146').send('Hey ' + member + '! Welkom in RealityMC! Veel plezier!'); 
 });
 
+function clean(text) {
+    if (typeof(text) === "string")
+      return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+        return text;
+}
+
+var prefix = "!";
+
+client.on("message", (message) => {
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+if (message.content.toLowerCase().startsWith(prefix + `open ticket`)) {
+    const reason = message.content.split(" ").slice(1).join(" ");
+    if (message.guild.channels.exists("name", "ticket-" + message.author.username)) return message.channel.send(`Jij hebt op dit moment al een ticket open.`);
+    message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+        let role = message.guild.roles.find("name", "Supporter", "Moderator", "Administrator", "Hosting", "Beheer");
+        let role2 = message.guild.roles.find("name", "@everyone");
+        c.overwritePermissions(role, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
+        });
+        c.overwritePermissions(role2, {
+            SEND_MESSAGES: false,
+            READ_MESSAGES: false
+        });
+        c.overwritePermissions(message.author, {
+            SEND_MESSAGES: true,
+            READ_MESSAGES: true
+        });
+        message.channel.send(`:white_check_mark: Je ticket is gemaakt, #${c.name}.`);
+        const embed = new Discord.RichEmbed()
+        .setColor(0xCF40FA)
+        .addField(`Hey ${message.author.username}!`, `Je hebt een ticket geopend probeer zo goed mogelijk uit te leggen waarom je deze ticket hebt geopent. Onze Support zal je dan zo snel mogelijk helpen.`)
+        .setTimestamp();
+        c.send({ embed: embed });
+    }).catch(console.error);
+}
+if (message.content.toLowerCase().startsWith(prefix + `sluit`)) {
+    if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`je kan het ticket niet sluiten als je niet in de channel van de ticket zit.`);
+
+    message.channel.send(`Weet je het zeker? Deze actie kan niet ongedaan worden gemaakt\nAls je het zeker weet typ \`!ikweethetzeker\`. Na 10 seconde word dit geanuleerd en zal dit ticket niet verwijderd worden.`)
+    .then((m) => {
+      message.channel.awaitMessages(response => response.content === '!ikweethetzeker', {
+        max: 1,
+        time: 10000,
+        errors: ['time'],
+      })
+      .then((collected) => {
+          message.channel.delete();
+        })
+        .catch(() => {
+          m.edit('Je hebt geen !ikweethetzeker getypt, het ticket word niet gesloten').then(m2 => {
+              m2.delete();
+          }, 3000);
+        });
+    });
+}
+
+});
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
@@ -59,7 +119,7 @@ if(command === "set") {
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
-    message.channel.send("Dit is een waarschuwing wegens: "(sayMessage))
+    message.channel.send("Dit is een waarschuwing wegens:")(sayMessage);
   }
 
   
