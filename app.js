@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 client.on('guildMemberAdd', member => {
-    member.guild.channels.get('444882109086171146').send('Hey' + member + '! Welkom in RealityMC! Veel plezier!'); 
+    member.guild.channels.get('444882109086171146').send('Hey ' + member + '! Welkom in RealityMC! Veel plezier!'); 
 });
 
 client.on("message", async message => {
