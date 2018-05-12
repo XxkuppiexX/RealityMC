@@ -8,6 +8,10 @@ client.on('guildMemberAdd', member => {
     member.guild.channels.get('444882109086171146').send('Hey ' + member + '! Welkom in RealityMC! Veel plezier!'); 
 });
 
+client.on("ready", () => {
+  client.user.setActivity(`RealityMC`);
+});
+
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   
