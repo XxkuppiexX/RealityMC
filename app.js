@@ -101,6 +101,7 @@ client.on("message", async message => {
     const m = message.channel.send(sayMessage);
   }
 
+
 if(command === "set") {
   if(!message.member.roles.some(r=>["Beheer", "Hosting"].includes(r.name)) )
   return message.reply("Je hebt hier geen perms voor");
@@ -190,5 +191,23 @@ if(command === "set") {
   }
 });
 
+client.on('message', message => {
+  // Voice only works in guilds, if the message does not come from a guild,
+  // we ignore it
+  if (!message.guild) return;
+
+  if (message.content === '!join') {
+    // Only try to join the sender's voice channel if they are in one themselves
+    if (message.member.voiceChannel) {
+      message.member.voiceChannel.join()
+        .then(connection => { // Connection is an instance of VoiceConnection
+          message.reply('Ik ben geconnect in de channel!');
+        })
+        .catch(console.log);
+    } else {
+      message.reply('ik moet eerst verbinden met een kanaal!');
+    }
+  }
+});
 
 client.login(process.env.BOT_TOKEN);
