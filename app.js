@@ -4,7 +4,10 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
-  
+client.on('guildMemberAdd', member => {
+    member.guild.channels.get('444882109086171146').send('Hey' + member + '! Welkom in RealityMC! Veel plezier!'); 
+});
+
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
   
@@ -26,7 +29,7 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.
 
   if(command === "say") {
-    if(!message.member.roles.some(r=>["☄️ Galaxy CEO ☄️", "⚙️ Head-Support ⚙️", "bot perms"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["beheer"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -38,7 +41,7 @@ client.on("message", async message => {
   }
 	
 if(command === "set") {
-  if(!message.member.roles.some(r=>["☄️ Galaxy CEO ☄️"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["beheer"].includes(r.name)) )
   return message.reply("Je hebt hier geen perms voor");
   const sayMessage = args.join(" ");
   message.delete().catch(O_o=>{});
@@ -47,7 +50,7 @@ if(command === "set") {
 	
 	
   if(command === "warn") {
-    if(!message.member.roles.some(r=>["☄️ Galaxy CEO ☄️", "⚙️ Head-Support ⚙️", "bot perms"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["beheer"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -90,7 +93,7 @@ if(command === "set") {
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
-    if(!message.member.roles.some(r=>["⚙️ Head-Support ⚙️", "☄️ Galaxy CEO ☄️", "bot perms"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["beheer"].includes(r.name)) )
       return message.reply("sorry je kan geen !ban vraag staff om hulp");
     
     let member = message.mentions.members.first();
