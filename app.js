@@ -41,7 +41,7 @@ if (message.content.toLowerCase().startsWith(prefix + `open ticket`)) {
         message.channel.send(`:white_check_mark: Je ticket is gemaakt, #${c.name}.`);
         const embed = new Discord.RichEmbed()
         .setColor(0xCF40FA)
-        .addField(`Hey ${message.author.username}!`, `Je hebt een ticket geopend probeer zo goed mogelijk uit te leggen waarom je deze ticket hebt geopent. Onze Support zal je dan zo snel mogelijk helpen.`)
+        .addField(`Je ticket is succesvol gemaakt ${message.author.username}!`, `Leg in de ticket zo goed mogelijk uit waarom jij deze hebt geopend. Een stafflid zou jij zo snel mogelijk helpen met jouw vraag.\nDe maximale wachttijd voor het antwoord op jouw ticket is 1 uur.`)
         .setTimestamp();
         c.send({ embed: embed });
     }).catch(console.error);
