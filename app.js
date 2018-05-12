@@ -52,7 +52,7 @@ if(command === "set") {
 	
   if(command === "warn") {
     if(!message.member.roles.some(r=>["Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
-    return message.reply("Sorry je hebt hier geen perms voor :(");
+    return message.reply("Sorry je hebt hier geen perms voor vraag staff om hulp.");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
     const sayMessage = args.join(" ");
