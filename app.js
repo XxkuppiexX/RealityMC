@@ -205,7 +205,7 @@ client.on('message', message => {
         })
         .catch(console.log);
     } else {
-      message.reply('ik moet eerst verbinden met een kanaal!');
+      message.reply('je moet eerst verbinden met een kanaal!');
     }
   }
 });
