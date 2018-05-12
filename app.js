@@ -99,7 +99,8 @@ client.on("message", async message => {
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
     const m = await message.channel.send(sayMessage);
-  if(command === "sayedit")
+  }
+  if(command === "sayedit") {
   if(!message.member.roles.some(r=>["Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
     const editMessage = args.join(" ")
