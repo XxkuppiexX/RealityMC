@@ -195,7 +195,7 @@ if(command === "set") {
   
   if(command === "clear") {
     if(!message.member.roles.some(r=>["Beheer", "Administrator", "Hosting"].includes(r.name)) )
-    return message.reply("je kan geen !clear vraag aan een CEO of head-support om hulp");
+    return message.reply("je kan geen !clear vraag staff om hulp");
     // This command removes all messages from all users in the channel, up to 100.
     
     // get the delete count, as an actual number.
