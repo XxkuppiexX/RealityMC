@@ -6,7 +6,7 @@ const config = require("./config.json");
 
 const MusicBot = require('discord-musicbot');
  
-const config = {
+const config2 = {
   // these 3 are always required.
   token: process.env.BOT_TOKEN,
   serverId: '444113312335003658',
@@ -21,7 +21,7 @@ const config = {
   }
 };
  
-const musicBot = new MusicBot(config);
+const musicBot = new MusicBot(config2);
  
 musicBot.run();
 
