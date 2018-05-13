@@ -4,6 +4,27 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
+const MusicBot = require('discord-musicbot');
+ 
+const config = {
+  // these 3 are always required.
+  token: process.env.BOT_TOKEN,
+  serverId: '444113312335003658',
+  textChannelId: '444899039608045592',
+ 
+  // permissions is technically optional, but if you want to access to all
+  // permissions you'll need to at the very least make yourself an admin.
+  permissions: {
+    users: {
+      'YOUR USER ID': '277854121896312832',
+    },
+  }
+};
+ 
+const musicBot = new MusicBot(config);
+ 
+musicBot.run();
+
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('444882109086171146').send('Hey ' + member + '! Welkom in RealityMC! Veel plezier!'); 
 });
