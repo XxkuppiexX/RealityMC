@@ -141,7 +141,7 @@ if(command === "set") {
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing: 
-    message.channel.send("Dit is een waarschuwing wegens:"),(sayMessage);
+    message.channel.send("Dit is een waarschuwing wegens:" + sayMessage);
   }
 
   
