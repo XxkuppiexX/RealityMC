@@ -118,9 +118,9 @@ client.on("message", async message => {
     message.channel.send({embed: {
       color: 0xff0000,
       title: "**Storing Dienst**",
-      description:"**Storing Type:**\n" + naam + "\n \n**bescrijving:**\n" + storing,
+      description:"**Storing Type:**\n" + naam + "\n \n**Bescrijving:**\n" + storing,
       footer: {
-        text: "© GalaxyWorlds"
+        text: "© RealityMC"
     }
   }
   });
