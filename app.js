@@ -119,7 +119,14 @@ client.on("message", async message => {
     // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
     message.delete().catch(O_o=>{}); 
     // And we get the bot to say the thing:
-    const m = message.channel.send(sayMessage);
+    message.channel.send(sayMessage);
+    {
+  if(command === "sayedit")
+  if(!message.member.roles.some(r=>["Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
+  return message.reply("Sorry je hebt hier geen perms voor :(");
+  const editmsg = args.join(" ")
+  sayMessage.edit(editmsg)
+    }
   }
 
 
