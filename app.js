@@ -110,6 +110,22 @@ client.on("message", async message => {
   
   // Let's go with a few common example commands! Feel free to delete or change those.
 
+  if(command === "storing") {
+    if(!message.member.roles.some(r=>["Hosting", "Beheer"].includes(r.name)) )
+      return message.reply("Sorry je hebt hier geen perms voor :(");
+    let naam = args[0];
+      let storing = args.slice(1).join(" ");
+    message.channel.send({embed: {
+      color: 0xeb5ef7,
+      title: "**Storing Dienst**",
+      description:"**Storing Type:**\n" + naam + "\n \n**bescrijving:**\n" + storing,
+      footer: {
+        text: "© GalaxyWorlds"
+    }
+  }
+  });
+  }
+
   if(command === "say") {
     if(!message.member.roles.some(r=>["Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
