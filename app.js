@@ -116,7 +116,7 @@ client.on("message", async message => {
     let naam = args[0];
       let storing = args.slice(1).join(" ");
     message.channel.send({embed: {
-      color: 0xeb5ef7,
+      color: 0xff0000,
       title: "**Storing Dienst**",
       description:"**Storing Type:**\n" + naam + "\n \n**bescrijving:**\n" + storing,
       footer: {
