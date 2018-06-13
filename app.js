@@ -45,7 +45,7 @@ if (message.content.toLowerCase().startsWith(prefix + `open ticket`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (message.guild.channels.exists("name", "ticket-" + message.author.username)) return message.channel.send(`Jij hebt op dit moment al een ticket open.`);
     message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
-        let role = message.guild.roles.find("name", "Supporter", "Moderator", "Administrator", "Hosting", "👑 Beheer");
+        let role = message.guild.roles.find("name", "Supporter", "🔰 Moderator", "Administrator", "Hosting", "👑 Beheer");
         let role2 = message.guild.roles.find("name", "@everyone");
         c.overwritePermissions(role, {
             SEND_MESSAGES: true,
@@ -127,7 +127,7 @@ client.on("message", async message => {
   }
 
   if(command === "say") {
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -149,7 +149,7 @@ if(command === "set") {
 	
 	
   if(command === "warn") {
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor vraag staff om hulp.");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -165,7 +165,7 @@ if(command === "set") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
       return message.reply("je kan geen !kick vraag staff om hulp");
     
     // Let's first check if we have a member and if we can kick them!
@@ -192,7 +192,7 @@ if(command === "set") {
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
       return message.reply("sorry je kan geen !ban vraag staff om hulp");
     
     let member = message.mentions.members.first();
