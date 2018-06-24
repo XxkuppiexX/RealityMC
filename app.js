@@ -4,26 +4,7 @@ const client = new Discord.Client();
 
 const config = require("./config.json");
 
-const MusicBot = require('discord-musicbot');
- 
-const config2 = {
-  // these 3 are always required.
-  token: process.env.BOT_TOKEN,
-  serverId: '444113312335003658',
-  textChannelId: '444899039608045592',
- 
-  // permissions is technically optional, but if you want to access to all
-  // permissions you'll need to at the very least make yourself an admin.
-  permissions: {
-    users: {
-      'YOUR USER ID': '277854121896312832',
-    },
-  }
-};
- 
-const musicBot = new MusicBot(config2);
- 
-musicBot.run();
+
 
 client.on('guildMemberAdd', member => {
     member.guild.channels.get('444882109086171146').send('Hey ' + member + '! Welkom in RealityMC! Veel plezier!'); 
@@ -45,7 +26,7 @@ if (message.content.toLowerCase().startsWith(prefix + `open ticket`)) {
     const reason = message.content.split(" ").slice(1).join(" ");
     if (message.guild.channels.exists("name", "ticket-" + message.author.username)) return message.channel.send(`Jij hebt op dit moment al een ticket open.`);
     message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
-        let role = message.guild.roles.find("name", "Supporter", "🔰 Moderator", "Administrator", "Hosting", "👑 Beheer");
+        let role = message.guild.roles.find("name", "Supporter", "🔰 Sr Moderator", "🔰 Moderator", "🔰 Jr Moderator", "🔰 Discord Moderator", "💼 Administrator", "🔧 Bot Developer", "👑 Beheer");
         let role2 = message.guild.roles.find("name", "@everyone");
         c.overwritePermissions(role, {
             SEND_MESSAGES: true,
@@ -111,7 +92,7 @@ client.on("message", async message => {
   // Let's go with a few common example commands! Feel free to delete or change those.
 
   if(command === "storing") {
-    if(!message.member.roles.some(r=>["Hosting", "👑 Beheer"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["🔧 Bot Developer", "👑 Beheer"].includes(r.name)) )
       return message.reply("Sorry je hebt hier geen perms voor :(");
     let naam = args[0];
       let storing = args.slice(1).join(" ");
@@ -127,7 +108,7 @@ client.on("message", async message => {
   }
 
   if(command === "say") {
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "💼 Administrator", "🔰 Sr Moderator", "🔰 Moderator", "🔰 Jr Moderator", "🔰 Discord Moderator", "🔧 Bot Developer"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor :(");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -140,7 +121,7 @@ client.on("message", async message => {
 
 
 if(command === "set") {
-  if(!message.member.roles.some(r=>["👑 Beheer", "Hosting"].includes(r.name)) )
+  if(!message.member.roles.some(r=>["👑 Beheer", "🔧 Bot Developer"].includes(r.name)) )
   return message.reply("Je hebt hier geen perms voor");
   const sayMessage = args.join(" ");
   message.delete().catch(O_o=>{});
@@ -149,7 +130,7 @@ if(command === "set") {
 	
 	
   if(command === "warn") {
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "💼 Administrator", "🔰 Sr Moderator", "🔰 Moderator", "🔰 Jr Moderator", "🔰 Discord Moderator", "🔧 Bot Developer"].includes(r.name)) )
     return message.reply("Sorry je hebt hier geen perms voor vraag staff om hulp.");
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -165,7 +146,7 @@ if(command === "set") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
     // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "💼 Administrator", "🔰 Sr Moderator", "🔰 Moderator", "🔰 Jr Moderator", "🔰 Discord Moderator", "🔧 Bot Developer"].includes(r.name)) )
       return message.reply("je kan geen !kick vraag staff om hulp");
     
     // Let's first check if we have a member and if we can kick them!
@@ -192,7 +173,7 @@ if(command === "set") {
   if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "🔰 Moderator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "💼 Administrator", "🔰 Sr Moderator", "🔰 Moderator", "🔰 Jr Moderator", "🔰 Discord Moderator", "🔧 Bot Developer"].includes(r.name)) )
       return message.reply("sorry je kan geen !ban vraag staff om hulp");
     
     let member = message.mentions.members.first();
@@ -210,7 +191,7 @@ if(command === "set") {
   }
   
   if(command === "clear") {
-    if(!message.member.roles.some(r=>["👑 Beheer", "Administrator", "Hosting"].includes(r.name)) )
+    if(!message.member.roles.some(r=>["👑 Beheer", "💼 Administrator", "🔧 Bot Developer"].includes(r.name)) )
     return message.reply("je kan geen !clear vraag staff om hulp");
     // This command removes all messages from all users in the channel, up to 100.
     
